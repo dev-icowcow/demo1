@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>srcset响应式</title>
+
+
+    <style>
+        
+        /*.example {
+            background-image: -webkit-image-set( "test.png" 1x, "test-2x.png" 2x, "test-print.png" 600dpi);
+        }*/
+
+    </style>
+
+</head>
+
+<body>
+
+
+    <img src="./images/128px.jpg" srcset="./images/128px.jpg 128w, ./images/256px.jpg 256w, ./images/512px.jpg 512w" sizes="(max-width: 360px) 340px, 128px">
+
+    <img src="./images/128px.jpg" srcset="./images/128px.jpg 128w, ./images/256px.jpg 256w, ./images/512px.jpg 512w" sizes="(max-width: 360px) calc(100vw - 20px), 128px">
+
+</body>
+
+</html>

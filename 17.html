@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>存储</title>
+</head>
+<body>
+    
+        <pre class="page-404">
+          .----.
+       _.'__    `.
+   .--($)($$)---/#\
+ .' @          /###\
+ :         ,   #####
+  `-..__.-' _.-\###/
+        `;_:    `"'
+      .'"""""`.
+     /,  ya ,\\
+    //  404!  \\
+    `-._______.-'
+    ___`. | .'___
+   (______|______)
+        </pre>
+
+    <script>
+
+
+
+        //类似cookie
+
+
+        //  [ window.localStorage ]
+        //添加，由于localStorage是永久存储，除非删除否则一种存在，容量为5M
+        // localStorage.setItem("myCat",'Tom');
+
+
+        //获取
+        // alert(localStorage.getItem("myCat"))   //Tom
+
+
+        //删除
+        // localStorage.removeItem("myCat");
+
+
+
+
+
+        //  [ window.sessionStorage ]
+        //sessionStorage临时存储，将数据存储到其中，不管你前进后退还是刷新，数据依然存在，只有关闭窗口重新进入数据才会自动清除
+        //这里一样有setItem,getItem,removeItem方法，还有一个clear()删除所有保存的数据;
+
+        //以下案例:
+        //先获取当前的key
+        // var value = sessionStorage.getItem("key");
+
+        // //滚动时保存滚动位置
+        // $(window).scroll(function(){
+
+        //     if($(document).scrollTop() != 0){
+        //         sessionStorage.setItem("offsetTop",$(window.scrollTop()));
+        //     }
+
+        // });
+
+        // //onload时，取出并滚动到上次保存位置
+        // window.onload = function(){
+        //     var offsetTop = sessionStorage.getItem("offsetTop");
+        //     $(document).scrollTop(offsetTop);
+        // }
+
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+
+
+
+
+    <script>
+
+    //正则
+    //1-构造函数方法
+    // var reg = new RegExp(/正则规则/);
+    // var reg = new RegExp(/a/);  //表示去匹配某个字符串中至少有一个a；
+       //方法：regObj.test("匹配的字符串")；
+    //    var str = reg.test("123a9021"); //匹配则返回true,否则false
+    //    console.log(str);  //true
+       
+
+    //2-字面量
+    // var reg = /a/;
+    // var str = "1223a5454"
+    // var str1 = reg.test(str);
+    // console.log(str1);
+    
+
+
+    //  .     表示匹配除了回车换行以外的任意单个字符   回车\r   换行\n
+
+    //   \    将带有特定意义的的字符变为普通字符  
+
+    //   |    或者    跟js中的区别开来
+
+    //   ()   提升优先级 
+
+
+    //范围表达式
+    //  ?   问号前面的字符至少出现0次或者1次
+
+    //  +   加号前面的字符至少出现1次
+
+    //  *   星号前面至少出现0次或者多次
+
+    //  {n}  表示前面的字符或者表达式连续出现n次，
+
+    //  {n,}  表示至少连续出现n次
+
+    //  {n,m}  表示连续出现 n ~ m 次
+
+
+
+    //边界限定符
+    //  ^   表示以某表示式或字符为开头，开头符号写在最前面
+
+    //  $   表示以某表示式或字符为结尾，结尾符号写在最后面
+
+
+
+
+    //  []   代表一个集合或者字符的范围,表示范围，可以去除基本元字符的特殊意义
+
+    //  [0-9]   0-9的数字    \d
+    //  [a-z]   a-z的小写字母
+    //  [A-Z]   A-Z的大写字母
+    //  [.]   //转义,将 . 转为普通字符；匹配字符或表达式中出现.
+
+    //  [^范围]   相对于中括号中的范围取反
+    //  [^0-9]   非数字
+    //  [^a-z]   非小写字母
+    //  [^A-Z]   非大写字母
+    //  [^0-9a-zA-Z]  非数字跟字母
+
+
+
+
+    //  \s   空白字符
+    //  \S   非空白字符
+
+    //  1.空白字符包括回车 换行 缩进 空格
+    //  2.空字符串既不是空白字符也不是非空白字符
+    // var reg1 = /\s/;
+    // var reg2 = /\S/;
+    // console.log(reg1.test(''));  //false
+    // console.log(reg2.test(''));  //false
+    // 因为空字符串是有长度的，长度为0；   console.log("".length);  // 0
+    
+    
+    
+    </script>
+
+
+</body>
+</html>

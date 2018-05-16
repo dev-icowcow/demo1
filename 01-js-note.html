@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>笔记</title>
+    <style>
+
+    </style>
+</head>
+
+<body>
+
+    <!--<ul id="list">
+        <li id="click">1</li>
+        <li id="addEvent">2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+    </ul>-->
+
+
+
+
+
+    <!--<script src="../demo1/jquery.js"></script>-->
+    <script>
+        //上下文模式的具体运用
+        //1.将伪数组变为数组
+    //      var fakeArr={ 
+    //     0:'广东',
+    //     1:'广西',
+    //     2:'湖南',
+    //     3:'湖北',
+    //     4:'山东',
+    //     5:'山西',
+    //     6:'河南',
+    //     7:'河北',
+    //     length:8
+    // };
+    // var desArr = [];
+    // desArr.push.apply(desArr,fakeArr);
+    // console.log(desArr);
+        //
+
+
+
+
+
+
+        //jq事件委托||事件代理
+        // $("#list").on('click','li',function(event){
+        //     var target = $(event.target);
+        //     target.css("background",'red')
+        // })
+
+        //event对象,ie8一下要如下写,在新代码中已经不用这样写了
+        // function fn(e){
+        //     var event = e || window.e;
+        //     var target = event.target|| event.srcElement;
+        // }
+
+
+
+
+
+        //event.stopProPagation()阻止事件传播，事件不冒泡，即是不向上传递
+        //event.stopPreventDefault()只是阻止默认行为，但事件依然会冒泡，这个方法不被ie支持，需要写成window.event.stopPrevenetDefault()
+        //event.stopImmediatePropagation()阻止同一事件被触发
+        //return false在其他事件下不一定能阻止事件，所有尽量少用，用click事件可以用，用addEventListener就尽量用stopProPagation()
+        //使用了return false相当于使用了stopProPagation和stopPreventDefault,就是阻止的事件传播和默认行为
+
+
+
+
+
+        //addEventListener和click的区别？
+        // var cli = document.getElementById("click");
+        // var addevnt = document.getElementById("addEvent");
+        // cli.onclick = function(){
+        //     alert(1)
+        // }
+        // cli.onclick = function(){
+        //     alert(2)
+        // }      //click方法会覆盖第二次的点击事件
+
+        // addevnt.addEventListener('click',function(){
+        //     alert(1)
+        // },false);
+        // addevnt.addEventListener('click',function(){
+        //     alert(2)
+        // },false)  //点击事件会触发两次，并且不会发生覆盖，第三个参数可以判断其在捕获阶段还是冒泡阶段
+
+
+
+
+        //点击弹出对用下标
+        // var lis = document.querySelectorAll("li");
+        //第一种
+        // for(var i = 0;i<lis.length;i++){
+        //     lis[i].index = i;
+        //     lis[i].onclick = function(){
+        //         console.log(this.index);
+        //     }
+        // }
+
+        //第二种
+        //    for(var i = 0;i<lis.length;i++){
+        //         (function(e){
+        //             lis[i].onclick = function(){
+        //                 console.log(e)
+        //             }
+        //         })(i)
+        //     }
+
+
+        // 第三种 Jquery方式 
+        //  $("#target").each(function(value,item,i){
+        //     $(this).click(function(){ console.log(i+1) })    
+        // })
+
+
+
+
+        // var test = function () {
+
+        //     for (var i = 0; i <= 4; i++) {
+        //         (function(e){
+        //             // setTimeout(function() {
+        //             //     console.log(e);
+        //             // }, 0);
+        //             console.log(e);
+        //         })(i)
+        //     }
+        // }
+        // test();
+
+
+
+        // var err = Error("错误");
+        // console.log(err.stack);
+
+
+
+
+        // base64  互转
+        // var abc =  "base64";
+        // console.log(btoa(abc)); //YmFzZTY0 将任意值转为base64编码
+
+        // var qw = "YmFzZTY0";
+        // console.log(atob(qw))  //将base64转为原来的值
+
+        // 这两个方法不适合非 ASCII 码的字符，会报错
+        // function getbase64(str){
+        //     return btoa(encodeURIComponent(str));
+        // }
+        // getbase64("加上转码环节");
+        // console.log(getbase64());
+
+        // function b64Decode(str) {
+        //     return decodeURIComponent(atob(str));
+        // }
+        // console.log(b64Decode("YmFzZTY0"))
+
+
+
+        //查看对象所有的自身属性名Object.keys()
+        //    var obj = {
+        //        p1:"123",
+        //        p2:"90"
+        //    }
+        //    console.log(Object.keys(obj));
+        // var array = [1,23,4,5,6,64];
+        // console.log(Object.keys(array))
+
+        //delete命令用于删除对象的属性，删除成功后返回true,如果obj没有这个属性依然会返回true，如果返回false说明这个属性不能删除，而且只能删除对象本身有的属性，不能删除继承的属性
+        //delete删除数组不会改变length，会留下一个空位
+        //    console.log(delete obj.p1)
+        //    console.log(obj.p1)
+        //    console.log(Object.keys(obj))
+
+        // Object.hasOwnProperty方法：在一个对象中添加新的属性，并返回新的对象
+
+
+
+        // hasOwnProperty方法,判断对象内有没有这个属性，不包含继承，就判断是否为自身的属性
+        // var person = {
+        //     name:"方法"
+        // }
+
+        // for(var key in person){
+        //     if(person.hasOwnProperty(key)){
+        //         console.log(key);
+        //     }
+        // }
+
+
+
+        //arguments:为类似与数组的对象，有数组的length，但不是数组的还有dom元素集和字符串
+        // function agms(){
+        //     return arguments;
+        // }
+        // var arrayLike = agms("a","b");
+        // console.log(arrayLike[0])
+        // console.log(arrayLike.length)
+        // console.log(arrayLike instanceof Array) //false
+        //使用slcie方法将‘类似数组的对象’变为真正的数组
+        // var arr = Array.prototype.slice.call(arrayLike)
+
+
+
+        // 关于构造函数：多个参数时，最后一个参数就是函数体，当构造函数只有一个参数时，这个参数就是函数体,函数体返回加return 
+        //这种声明的方式不直观，几乎无人使用
+        // var fun = new Function('x','y','return x+y');
+        // console.log(fun(3,4))
+
+
+
+        //斐波那契数列，利用函数递归
+        // function fbnq(num){
+        //     if(num==0) return 0;
+        //     if(num==1) return 1;
+        //     return fbnq(num-2) + fbnq(num-1);
+        // };
+        // console.log(fbnq(8)) //计算到斐波那契数列的第8个元素是21
+
+
+        //try...catch语句将能引发错误的代码放在try中，并且对应一个响应，然后有异常就抛出，finally无论是否有异常都会执行
+
+
+
+        //函数作用域注意点：函数y里边调用函数x，并不会引用函数y里声明的变量；       如果函数内部声明函数，并将函数返回，可以使用y里的声明
+        // var x = function () {
+        //     console.log(a);
+        // };
+        // function y(f) {
+        //     var a = 2;
+        //     f();
+        // }
+        // y(x) //a is not defind
+
+        // var x = 2;
+        // function a(){
+        //     var x =1;
+        //     function b(){
+        //         alert(x)
+        //     }
+        //     return b;
+        // }
+        // a()();
+
+
+        //错误机制
+        // try{
+        //     throw new Error("new error")
+        // }catch(e){
+        //     console.log(e.name + ":" + e.message);
+        // }finally{
+        //     console.log("error red")
+        // }
+
+
+        //toString 应用，判断数据类型
+        // console.log([1,2,3].toString())
+        // console.log((function(){
+        //     return 2;
+        // })().toString())
+        // console.log(new Date().toString())
+
+
+        //Object.prototype.hasownProperty()判断对象是否有该属性
+        // var obj = {
+        //     p:"123"
+        // };
+        // console.log(obj.hasOwnProperty('p'))
+
+
+        //数组添加 apply用法 --- 数组
+        // var a = [123,434,5,4];
+        // var b = [4,5,52];
+        //有数组的原型相加，这数组为a,b
+        // console.log(Array.prototype.push.apply(a,b)); === a.push.apply(a,b); 返回数组长度
+        //数组添加 call用法 ----对象 ， 并且有长度
+
+
+        //slice的另一个应用，将类似数组的对象转为数组
+        //    var num = Array.prototype.slice.call({0:'ds',1:'r',length:2})
+        //    console.log(num)
+
+
+
+        //数组splice(开始删除的位置，结束删除的位置，替换删除的元素,替换删除的元素.....)
+        // var arr = [1,2,45,56,6,76,7777];
+        // console.log(arr.splice(2,2,99))
+        // console.log(arr)
+
+
+
+        //map方法，map方法可以第一个（参数传入一个函数，函数有三个参数，第一个为当前成员，第二个为当前位置，第三个为数组本身，回掉函数返回时候this的指向对象）
+        // map(function(element,index,arr){
+        // return ...
+        // }，this)  //这个为映射方法，也就是原数组被映射为新的数组，需要有返回值，否则映射为undefined
+        // var users = [
+        //     { name: "张含韵", "email": "zhang@email.com" },
+        //     { name: "江一燕", "email": "jiang@email.com" },
+        //     { name: "李小璐", "email": "li@email.com" }
+        // ];
+
+        // var newUsers = users.map(function(element,index,users){
+        //     console.log(element)
+        //     console.log(index)
+        //     console.log(users)
+        // })
+    
+// var emails = users.map(function (user) { return user.email; });
+
+// console.log(emails.join(", ")); // zhang@email.com, jiang@email.com, li@email.com
+
+
+
+
+
+    //forEach第一个参数为函数，第二个参数为返回的this
+    // var arr = [];
+    // [1,2,3].forEach(function(elm){
+    //     // this.push(elm * 2);
+    // },arr)
+    // console.log(arr)
+
+
+
+    //filter(function(element,index,arr){},this new Obj )过滤方法的第一个参数为函数，该方法不会改变原值
+//     var arr = [12,3,34]
+//    console.log( arr.filter(function(ele){
+//         return (ele > 3);
+//     }))
+
+
+    //some()方法(function(element,index,arr){}，this)数组方法，只要有一个成员符合条件，则返回true，否则返回false
+    //every()则于some放大相反，只要所有成员符合条件才返回true
+    //对于空数组，some()返回true，every返回false
+
+
+
+
+    //reduce()和reduceRight()方法，第一个参数为函数，第二个参数为起始值；依次处理数组的每一个成员，并最终累计为一个值；reduce为从左到右，reduceRight为从右到左
+    // var arr = [1,2,3,4,5];
+    // console.log(arr.reduce(function(x,y){
+    //     return x + y;
+    // },8))
+
+
+
+    //indexOf()和lasrindexOf()
+    //indexOf(num)可以查找数组的位置，如果没有就返回-1
+    //laseindexOf(num,startNum)还有可以接受第二个参数,表示查找的开始位置
+    //这两个方法都无法查找NaN
+
+
+
+    //自定义数字的对象方法
+    // Number.prototype.add = function(x){
+    //     return this + x;
+    // }
+    // console.log((8).add(2))
+
+
+
+    //理解对象的this指向对象
+    // var obj = {
+    //     name:"张三",
+    //     setName:function(){
+    //         return console.log('姓名:'+this.name)
+    //     }
+    // }
+    // console.log(obj.setName());
+
+
+
+    //事件监听
+    // target.addEventListener(type,listener,useCaptrue); type:事件类型，没有‘on’,区分大小写，listener:事件监听回调，useCaptrue:默认false在冒泡阶段触发，老式浏览器一定要写这个属性
+    //例：
+    // function fn(){
+    //     console.log('123');
+    // }
+    // document.addEventListener('click',fn,false);
+
+
+    //<div onclikc="somelist()"></div>   html中调用函数的（）最好加上
+
+
+    //Jquery中四种绑定事件的方式  
+    // 第一种：live()方式，动态方式，现已过时，属于jq旧版本，基本不用
+    // $("p").live("click",function(){})
+
+
+    // 第二种：bind() 组合方式
+    // $("div p").bind("click",function(){})  ===   $("p").click(function(){})
+
+
+    // 第三种：delegate()事件委托方式
+    // $("div").delegate("p","click",function(){})
+
+
+    // 第四种：on()方式
+    //$("p").on("click",function(){})
+
+
+
+
+
+    //js中四种创建对象的方式,正常的创建一个对象，里边包含的属性和方法
+    //1-单体模式
+    // var obj = {
+    //     name:"李狗蛋",
+    //     age:29,
+    //     showName:function(){
+    //         console.log(this.name);
+    //     },
+    //     showAge:function(){
+    //         console.log(this.age);
+    //     }
+    // }
+
+
+    //2-工厂模式，在构造函数中新建一个对象，生成这个对象的属性和方法
+    // function Parson(name,age){
+    //     var obj = new Object();
+    //     obj.name = name;
+    //     obj.age = age;
+    //     obj.showName = function(){
+    //         console.log(this.name);
+    //     },
+    //     obj.showAge = function(){
+    //         console.log(this.age);
+    //     }
+    // }
+
+
+    //3-构造函数，构造函数本对象
+    // function Person(name,age){
+    //     this.name = name;
+    //     this.age = age;
+    //     this.showName = function(){
+    //         console.log(this.name);
+    //     },
+    //     this.showAge = function(){
+    //         console.log(this.age);
+    //     }
+    // }
+
+
+    //4-原型模式
+    // function Person(name,age){
+    //     this.name = name;
+    //     this.age = age;
+    // }
+    // Person.prototype.showName = function(){
+    //     console.log(this.name);
+    // }
+
+    // Person.prototype.showAge = function(){
+    //     console.log(this.age);
+    // }
+    </script>
+
+</body>
+
+</html>

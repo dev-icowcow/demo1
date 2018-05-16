@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    
+
+
+<script>
+    //生成邀请码方法一
+    function createInviteCode() {
+        var s = [],a=6,b=10;
+        var chars = "123456789QWERTYUIPASDFGHJKZXCVBNM";
+        for (var i = 0; i < a; i++) {
+            s[i] = chars.substr(Math.floor(Math.random() * 0xb), 1);
+        }   
+       var uuid = s.join("");
+        document.getElementById("ic").value=uuid;
+    }
+
+
+</script>
+
+</body>
+</html>

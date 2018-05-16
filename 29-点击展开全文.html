@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .showAll {
+            width: 60%;
+            margin: 0 auto;
+            background: #ecebeb;
+            padding: 10px;
+        }
+
+        .showAll .title {
+            font-size: 20px;
+            font-weight: bold;
+            color: #af0015;
+        }
+
+        .showAll .author {
+            color: #a1a1a1;
+            margin: 12px 0;
+        }
+
+        .showAll .content {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="showAll">
+        <p class="title">
+            一则励志故事
+        </p>
+        <p class="author">
+            作者：来自网络 发表时间：2014-3-1
+        </p>
+        <p>
+            彼得·韩德先生现任卡内基公司 (Dale Carnegie & Associates) 总裁及首席执行官。卡内基公司为训练界中的翘楚,在全世界85个国家有160个分支机构。
+             除此之外，彼得先生还是数家大公司的董事，作为一个培训别人怎样获得成功的专业机构的总裁，他是怎样获得成功的呢？日前，记者在北京的东方君悦大酒店采访了
+            这位CEO，听他讲述了自己是怎样获得成功的故事。 彼得先生通过一个故事讲了他对成功的理解。他说他在五岁时因为生病去看医生，当时病痛...
+            <a class="showContent" href="javascript:void(0);">查看全文</a>
+        </p>
+        <div class="content">
+            彼得·韩德先生现任卡内基公司 (Dale Carnegie & Associates) 总裁及首席执行官。卡内基公司为训练界中的翘楚,在全世界85个国家有160个分支机构。
+             除此之外，彼得先生还是数家大公司的董事，作为一个培训别人怎样获得成功的专业机构的总裁，他是怎样获得成功的呢？日前，记者在北京的东方君悦大酒店采访了
+            这位CEO，听他讲述了自己是怎样获得成功的故事。 彼得先生通过一个故事讲了他对成功的理解。他说他在五岁时因为生病去看医生，当时病痛使他很难受，
+            医生当时问他，你最想要的是什么，彼得先生对医生说，我想 要快乐，医生说，那你快乐就是了，结果他真的很快乐。所以彼得先生说，有许多人想追求成功
+            ，也有许多人问他，怎样才能尽快地获得成功。他认为，这要先看你对
+            成功的定义是什么？你的成功定义若是家庭和谐，那你就应想办法跟家庭成员更多地沟通，为此付出更多的时间，并在提升家庭成员的和谐之中也提升自己处理家庭问 题的能力。
+             彼得先生说：“我对成功的定义是快乐，我不会做我不喜欢的事和不喜欢的工作。中国的一句俗语说‘人在屋檐下，不得不低头'，我不喜欢那样的境况，我也不会那样
+            做。由于我认为快乐就是成功，所以说，我在5岁时就已经很成功了。”
+            <a class="hideContent" href="javascript:void(0);">收起全文</a>
+        </div>
+    </div>
+
+    <script src="../demo1/jquery.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".showContent").click(function () {        //当“展开全文”按钮点击的时候
+                $(".content").show();             //展示未完全显示的那部分内容
+                $(this).parent().hide();           //此处需要注意隐藏简略说明的文字，因为原来文字里面最后有省略号，不隐藏的后果就是展开后省略号仍旧在那里
+            });
+            $(".hideContent").click(function () {         //当“收起全文”按钮点击的时候
+                $(this).parent().hide();           //隐藏已经显示出来的文字
+                $(".showContent").parent().show();       //将简略说明的文字显示出来
+            });
+        });
+    </script>
+</body>
+
+</html>

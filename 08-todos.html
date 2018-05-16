@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>todos</title>
+</head>
+<style type="text/css">
+
+.content{
+	width: 400px;
+	margin: 50px auto 0 ;	
+}
+ .list{
+ 	margin:0;
+	padding:0;
+	list-style:none;
+	margin-top:20px; 	
+ }
+
+ .list li{
+ 	height:30px;
+	line-height:30px;
+	border-bottom:1px solid #ccc; 	
+ }
+ .list li span {
+	margin-left: 0px;
+}
+.list li a{
+	float:right;
+	text-decoration: none;
+	margin: 0 10px;
+}
+.addtext{
+	width: 320px;
+	height: 20px;
+	}
+</style>
+
+<script type="text/javascript" src ="../demo1/jquery.js"></script>
+<script type="text/javascript">
+
+	$(function() {
+		
+		var $btn = $('.addbtn');
+		//按钮的点击事件
+		$btn.click(function(){
+			//得到输入框的内容(下面这个方法只能读取，而不能进行设置值)
+			var contentinput = $('#addtext').val(); 
+			if(contentinput == ''){
+				alert('请输入内容！');
+				return;
+			}
+		//新增一个节点
+		var $sli = $('<li><span>'+contentinput+'</span><a href="javascript:;" class="up"> ↑ </a><a href="javascript:;" class="down"> ↓ </a><a href="javascript:;" class="del">删除</a></li>')
+		//将节点添加到对应的父节点中
+		$sli.appendTo($('#list'));	
+		//添加完之后再将输入框的内容清空，方便下次添加内容
+		document.getElementById('addtext').value = '';
+		});
+		
+		
+		//设置删除的点击事件(这样的话有个问题，就是新增的节点无法有这样的操作)
+		/*
+		$('.del').click(function() {
+			alert("111");
+		});
+		*/
+		//由于上面的原因，所以要采用事件委托的方式来进行
+		$('#list').delegate('a' , 'click' , function() {
+			var type = $(this).attr('class');
+			//判断当前要操作的类型
+			if(type == 'del'){   //删除操作
+				$(this).parent().remove();
+			}
+			else if(type == 'up'){  //上移操作
+				//判断是否在最上面
+				if($(this).parent().prev().length == 0){
+					alert("当前已经时最上面了，不能移动了哦");
+					return ;
+				}
+				$(this).parent().insertBefore($(this).parent().prev());
+			}
+			else if(type == 'down'){  //下移操作
+				if($(this).parent().next().length == 0){  //得到当前标签是否还有同级的标签，如果没有则就表示时最后一个了
+					alert("当前已经时最下面了，不能移动了哦");
+					return ;
+				}
+				$(this).parent().insertAfter($(this).parent().next());
+			}
+		})		
+	})
+
+</script>
+
+<body>
+<div class="content">
+	<h1>To do Plan</h1>
+	<input type="text" class="addtext" id="addtext">
+	<input type="button" value="增加" class="addbtn" id="addbtn">
+	<ul class="list" id="list">
+		<li><span>学习html</span><a href="javascript:;" class="up"> ↑ </a><a href="javascript:;" class="down"> ↓ </a><a href="javascript:;" class="del">删除</a></li>
+	</ul>
+</div>
+</body>
+</html>

@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <title>审批流实现(Flex转向Html5)第一版</title>
+
+    <link rel="stylesheet" type="text/css" href="style.css">
+
+    <!--定义本html的样式-->
+
+    <style type="text/css">
+        .highlighted {
+
+            background-color: yellow;
+        }
+
+
+
+        .validtarget {
+
+            background-color: lightblue;
+        }
+    </style>
+
+    <!--定义本html的js-->
+
+    <script type="text/javascript">
+      
+		//对放置目标canvas_liuchengtu的引用
+
+		var imagesDropTarget;
+
+
+
+        function loadDemo() {
+
+            imagesDropTarget = document.getElementById("div_liuchengtu");
+
+
+
+            //放置目标注册了dragenter、dragover、dragleave和drop事件处理器
+
+            imagesDropTarget.addEventListener("dragenter", handleDragEnter, false);
+
+            imagesDropTarget.addEventListener("dragover", handleDragOver, false);
+
+            imagesDropTarget.addEventListener("dragleave", handleDragLeave, false);
+
+            imagesDropTarget.addEventListener("drop", handleDrop, false);
+
+
+
+            //放置目标div_liuchengtu外围的td起到缓冲作用，用来重置放置目标区域的样式				
+
+            var td_liuchengtu = document.getElementById("td_liuchengtu");
+
+            td_liuchengtu.addEventListener("dragover", handleDragOverOuter, false);
+
+
+
+            //每个可拖动的成员都有拖动开始和结束事件处理器
+
+            var members = document.querySelectorAll("img");
+
+            [].forEach.call(members, function (member) {
+
+                member.addEventListener("dragstart", handleDragStart, false);
+
+                member.addEventListener("dragend", handleDragEnd, false);
+
+            });
+
+        }
+
+
+
+        window.addEventListener("load", loadDemo, false);
+
+
+
+        //"dragstart" 开始拖动时调用
+
+        function handleDragStart(evt) {
+
+            //拖动只支持copy操作
+
+            evt.effectAllowed = "copy";
+
+
+
+            //高亮潜在的放置目标			
+
+            imagesDropTarget.className = "validtarget";
+
+
+
+            //拖动起始目标是成员之一
+
+            //成员的数据是png图像
+
+            evt.dataTransfer.setData("image/png", evt.target.id);
+
+            //alert(evt.target.id);
+
+
+
+            return true;
+
+        }
+
+
+
+        //"dragenter" 停止传播，阻止默认的拖动动作将我们的目标列表显示为有效的放置目标
+
+        function handleDragEnter(evt) {
+
+            evt.stopPropagation();
+
+            evt.preventDefault();
+
+            return false;
+
+        }
+
+
+
+        //"dragover" 如果用户鼠标悬停在canvas上会显示为允许复制，同时为了提供更好的反馈效果，目标列表被高亮显示
+
+        function handleDragOver(evt) {
+
+            evt.dataTransfer.dropEffect = "copy";
+
+            evt.stopPropagation();
+
+            evt.preventDefault();
+
+
+
+            imagesDropTarget.className = "highlighted";
+
+            return false;
+
+        }
+
+
+
+        //"dragleave"
+
+        function handleDragLeave(evt) {
+
+            return false;
+
+        }
+
+
+
+        //"drop" 
+
+        function handleDrop(evt) {
+
+            evt.preventDefault();
+
+            evt.stopPropagation();
+
+
+
+            //使用image类型获取拖动项中的图像
+
+            var image = evt.dataTransfer.getData("image/png");
+
+            evt.dataTransfer.dropEffect = "copy";
+
+            var dsa = document.getElementById(image);
+
+            imagesDropTarget.innerHTML += "<img src='" + dsa.src + "'/>";
+
+
+
+        }
+
+
+
+        //为了实现更好的放置反馈效果，我们将td元素上的dragover事件作为关闭目标区域高亮效果的标记
+
+        function handleDragOverOuter(evt) {
+
+            if (evt.target.id == "td_liuchengtu")
+
+                imagesDropTarget.className = "validtarget";
+
+            evt.stopPropagation();
+
+
+
+            return false;
+
+        }
+
+
+
+
+
+
+
+        //"dragend" 确保清空所有的拖放操作
+
+        function handleDragEnd(evt) {
+
+            //恢复潜在放置目标样式
+
+            imagesDropTarget.className = null;
+
+            return false;
+
+        }
+    </script>
+
+</head>
+
+<body>
+
+    <div id="main" height="500" width="800">
+
+        <div id="main_head_button" height="45" width="100%" style="border:1px solid #A3C0E8">
+
+            <input id="new" class="button_new" type="button" value="新建">
+
+            <input id="save" class="button_save" type="button" value="保存">
+
+            <input id="close" class="button_close" type="button" value="关闭">
+
+        </div>
+
+        <table id="main_body_table" width="100%" height="90%" border="0" cellspacing="0" cellpadding="0">
+
+            <tr height="100%">
+
+                <td width="40%" height="100%">
+
+                    <table style="border:1px solid #00FF00">
+
+                        <!--tab切换的位置-->
+
+                        <tr>
+
+                            <td id="tablist1" style="border:1px solid #FFFF00">
+
+                                <div class="tab_nonce"><a href="#" onClick="changeTabList1(this)">流程控件</a></div>
+
+                                <div class="tab_normal"><a href="#" onClick="changeTabList1(this)">人力资源</a></div>
+
+                            </td>
+
+                        </tr>
+
+                        <!--accordiond的位置-->
+
+                        <tr>
+
+                            <td>
+
+                                <div id="div_components">
+
+                                    <div id="bar_liucheng">
+
+                                        <label>流程监控</label>
+
+                                    </div>
+
+                                    <div id="div_image" valign="bottom" align="left">
+
+                                        <table id="div_image_table" border="1" cellspacing="0" cellpadding="0">
+
+                                            <tr>
+
+                                                <td width="80px" height="55px" align="center">
+
+                                                    <span draggable="true">
+
+					                                    <img id="a" src="image/4.png">
+
+					                                </span>
+
+                                                    <div>
+
+                                                        <label>选择</label>
+
+                                                    </div>
+
+                                                </td>
+
+                                                <td width="80px" height="55px" align="center">
+
+                                                    <span draggable="true">
+
+					                                    <img id="b" src="image/2.png">
+
+					                                </span>
+
+                                                    <div>
+
+                                                        <label>连线</label>
+
+                                                    </div>
+
+                                                </td>
+
+                                                <td width="80px" height="55px" align="center">
+
+                                                    <span draggable="true">
+
+					                                    <img id="c" src="image/9.png">
+
+					                                </span>
+
+                                                    <div>
+
+                                                        <label>开始</label>
+
+                                                    </div>
+
+                                                </td>
+
+                                            </tr>
+
+                                            <tr>
+
+                                                <td width="80px" height="55px" align="center">
+
+                                                    <span draggable="true">
+
+					                                    <img id="d" src="image/10.png">
+
+					                                </span>
+
+                                                    <div>
+
+                                                        <label>结束</label>
+
+                                                    </div>
+
+                                                </td>
+
+                                                <td width="80px" height="55px" align="center">
+
+                                                    <span draggable="true">
+
+					                                    <img id="e" src="image/7.png">
+
+					                                </span>
+
+                                                    <div>
+
+                                                        <label>异步分支</label>
+
+                                                    </div>
+
+                                                </td>
+
+                                                <td width="80px" height="55px" align="center">
+
+                                                    <span draggable="true">
+
+					                                    <img id="f" src="image/7.png">
+
+					                                </span>
+
+                                                    <div>
+
+                                                        <label>同步分支</label>
+
+                                                    </div>
+
+                                                </td>
+
+                                            </tr>
+
+                                        </table>
+
+                                    </div>
+
+                                </div>
+
+    </div>
+
+    </td>
+
+    </tr>
+
+    <!--一个div和table的位置-->
+
+    <tr>
+
+        <td>
+
+            <div id="div_shuxingkuang">
+
+                <div id="bar_shuxingkuang"><label>属性对话框</label></div>
+
+                <table id="table_shuxingkuang" border="1" cellspacing="0" cellpadding="0">
+
+                    <tr>
+
+                        <th width="150px">名称</th>
+
+                        <th width="150px">值</th>
+
+                    </tr>
+
+                    <tr>
+
+                        <td width="150px">fdsf</td>
+
+                        <td width="150px">fsdf</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td width="150px">fdsf</td>
+
+                        <td width="150px">fsdf</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td width="150px">fsdf</td>
+
+                        <td width="150px">fasdf</td>
+
+                    </tr>
+
+                    <tr>
+
+                        <td width="150px">fsdf</td>
+
+                        <td width="150px">fsad</td>
+
+                    </tr>
+
+                </table>
+
+            </div>
+
+        </td>
+
+    </tr>
+
+    </table>
+
+    </td>
+
+    <td width="60%" height="100%">
+
+
+
+        <!--canvas-->
+
+        <table id="table_liuchengtu_html" style="border:1px solid #00FF00">
+
+            <!--tab切换的位置-->
+
+            <tr>
+
+                <td id="tablist2" style="border:1px solid #FFFF00">
+
+                    <div class="tab_nonce"><a href="#" onClick="changeTabList2(this)">流程图</a></div>
+
+                    <div class="tab_normal"><a href="#" onClick="changeTabList2(this)">html</a></div>
+
+                </td>
+
+                <!--accordiond的位置-->
+
+                <tr>
+
+                    <td id="td_liuchengtu">
+
+                        <div id="div_liuchengtu">
+
+                            <!--拖动放置目标区域-->
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
+            </tr>
+
+        </table>
+
+
+
+    </td>
+
+    </tr>
+
+    </table>
+
+    </div>
+
+</body>
+
+</html>

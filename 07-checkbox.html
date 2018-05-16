@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+
+<head>
+  <title>选中复选框，相关类变灰</title>
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<style>
+  #ShippingAddress::-webkit-input-placeholder {
+    color: #fff;
+  }
+
+  #ShippingAddress:-moz-placeholder {
+    color: #fff;
+  }
+
+  #ShippingAddress::-moz-placeholder {
+    color: #fff;
+  }
+
+  #ShippingAddress:-ms-input-placeholder {
+    color: #fff;
+  }
+</style>
+<script src="./jquery.js"></script>
+
+<body>
+
+
+
+
+  <div class="weui-cell">
+   <div class="weui-cell__hd"><label class="weui-label" id="xd_site">地&nbsp;&nbsp;&nbsp;&nbsp;址：</label></div>
+
+    <div class="weui-cell__bd" id="kind_aa">
+      <input id="ShippingAddress" class="weui-input" type="text" placeholder="请输入您的地址" value="{{User.UserCommunity.Address}}" name=aa>
+    </div>
+  </div>
+
+
+  <div class="weui-cell">
+    <div class="weui-cell__bd"><label class="weui-label">顾客上门：</label></div>
+
+    <div class="weui-cell__bd">
+      <label for="switchCP" class="weui-switch-cp" style="float:right;">
+                        <input id="switchCP" class="weui-switch-cp__input" type="checkbox" name=aa onclick="selectKind(this)">
+                        <div class="weui-switch-cp__box"></div>
+                    </label>
+    </div>
+  </div>
+
+
+
+
+
+
+
+  <div class="weui-cell">
+    <div class="weui-cell__hd"><label class="weui-label" id="xd_site">地&nbsp;&nbsp;&nbsp;&nbsp;址：</label></div>
+    <div class="weui-cell__bd" id="kind_aa">
+      <input id="ShippingAddress" class="weui-input" type="text" placeholder="请输入您的地址a " name=aa style="">
+    </div>
+  </div>
+
+  <div class="weui-cell">
+    <div class="weui-cell__hd"><label class="weui-label"><img src="./images/submit04.png" alt=""></label></div>
+    <div class="weui-cell__ft">
+
+      <label for="FromMentioning" class="weui-switch-cp">
+            <input id="FromMentioning" class="weui-switch-cp__input" type="checkbox"  name=aa onclick="selectKind(this)">
+            <div class="weui-switch-cp__box"></div>
+       </label>
+    </div>
+  </div>
+
+
+
+  <script>
+    function selectKind(the) {
+
+      var obj = the;
+      var container = document.getElementById("kind_" + obj.name);
+
+      for (var i = 0; i < container.getElementsByTagName("input").length; i++) {
+        container.getElementsByTagName("input")[i].disabled = obj.checked;
+      }
+
+    }
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+
+        .listTabbarHead {
+            position: fixed;
+            top: 10px;
+            right: 0;
+            left: 0;
+        }
+
+        .list_tabbar,
+        .listTab {
+            display: flex;
+        }
+
+        .list_tabbar_item,
+        .listTabItem {
+            flex: 1;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .listTabItem {
+            font-size: 12px;
+            position: relative;
+        }
+
+        .list_tabbar_active {
+            border-bottom: 2px solid #ef565b;
+        }
+
+
+        .listTab_active {
+            color: #ef565b;
+        }
+
+
+
+        .community {
+            position: absolute;
+            top: -16px;
+            right: -30px;
+        }
+
+        .nearby {
+            position: absolute;
+            top: -16px;
+            left: -20px;
+        }
+
+        .listTabItem span {
+            padding: 0 3px;
+        }
+
+
+        .nearby-content_item,
+        .community-content_item,
+        .itemContent {
+            display: none;
+            text-align: center;
+            margin-top: 45px;
+        }
+
+
+        .content_item_active {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!--flxed-->
+    <div class="listTabbarHead">
+        <!--list_tabbar-->
+        <div class="list_tabbar">
+
+            <div class="list_tabbar_item">
+                <span class="list_tabbar_span" id="wodeshequ">我的社区</span>
+            </div>
+            <div class="list_tabbar_item">
+                <span class="list_tabbar_span list_tabbar_active" id="fujinde">附近的</span>
+            </div>
+
+        </div>
+
+        <!--server or activity_tabbar-->
+        <div class="listTab">
+            <div class="listTabItem">
+                <div class="community" style="display:none">
+                    <span class="community_span listTab_active">服务</span>
+                    <span class="community_span">活动</span>
+                </div>
+            </div>
+            <div class="listTabItem">
+                <div class="nearby">
+                    <span class="nearby_span listTab_active">服务</span>
+                    <span class="nearby_span">活动</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="itemContent">
+        <div class="community-content_item content_item_active">第1个页面</div>
+        <div class="community-content_item">第2个页面</div>
+    </div>
+
+
+    <div class="itemContent content_item_active">
+        <div class="nearby-content_item content_item_active">第3个页面</div>
+        <div class="nearby-content_item">第4个页面</div>
+    </div>
+
+
+
+
+
+    <script src="../demo1/jquery.js"></script>
+    <script>
+
+        var skillTabBar = function(tabSpan,Listactive,contItem,contActive){
+            tabSpan.each(function(index){
+                $(this).click(function(){
+                    tabSpan.removeClass(Listactive);
+                    $(this).addClass(Listactive);
+                    contItem.removeClass(contActive);
+                    contItem.eq(index).addClass(contActive);
+                })
+            })
+        };
+        skillTabBar($(".community_span"),"listTab_active",$(".community-content_item"),"content_item_active");
+        skillTabBar($(".nearby_span"),"listTab_active",$(".nearby-content_item"),"content_item_active");
+
+        $(".list_tabbar_span").each(function (index) {
+            $(this).click(function () {
+                $(".list_tabbar_span").removeClass("list_tabbar_active");
+                $(this).addClass("list_tabbar_active");
+
+                if ($(this).text() == "附近的") {
+                    $(".community").hide();
+                    $(".nearby").fadeToggle(200);
+                }
+                if ($(this).text() == "我的社区") {
+                    $(".nearby").hide();
+                    $(".community").fadeToggle(200);
+                }
+
+                $(".itemContent").removeClass("content_item_active");
+                $(".itemContent").eq(index).addClass("content_item_active");
+
+            })
+        });
+
+
+    </script>
+</body>
+
+</html>
